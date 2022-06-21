@@ -46,7 +46,7 @@ try:
             param+=1
             ssh = paramiko.SSHClient()
             ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-            ssh.connect(r'kenia.supernosso.intra', username="desenvolvimento", password="@SuperNosso.2017")
+            ssh.connect(r'host', username="usuario", password="senha")
             sftp = ssh.open_sftp()
             localpath = "C:\\PATH_PARA_DOWNLOAD\\"+file
             remotepath = r'/u02/oradata/orcl/pathUNIX/'+file
