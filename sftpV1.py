@@ -2,15 +2,15 @@ def imaplib():
     import imaplib
     import email
 
-    SRV = "imap.gmail.com"
-    USER = "conciliacao.cartao@supernosso.com.br"
-    PASS = "oatrac.oacailicnoc"
+    SRV = "servidor.imap.com
+    USER = "email@email.com.br"
+    PASS = "senha"
 
     mail = imaplib.IMAP4_SSL(SRV)
     mail.login(USER, PASS)
 
     (mail.list())
-    (mail.select(mailbox="INFOCARDS")) #ALTERAR MARCADOR
+    (mail.select(mailbox="CAIXA_DE_EMAIL")) #ALTERAR MARCADOR
     respostas,IdDosEmails = mail.search(None,"UnSeen")
 
     for i in IdDosEmails[0].split():
@@ -35,7 +35,7 @@ imaplib()
 import os
 import sys
 import paramiko
-for _, _, arquivo in os.walk(r'C:\TESTE'):
+for _, _, arquivo in os.walk(r'C:\PATH_PARA_DOWNLOAD'):
     arq=arquivo
     param=0
 try:
@@ -48,13 +48,13 @@ try:
             ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
             ssh.connect(r'kenia.supernosso.intra', username="desenvolvimento", password="@SuperNosso.2017")
             sftp = ssh.open_sftp()
-            localpath = "C:\\TESTE\\"+file
-            remotepath = r'/u02/oradata/orcl/testebolivia/'+file
+            localpath = "C:\\PATH_PARA_DOWNLOAD\\"+file
+            remotepath = r'/u02/oradata/orcl/pathUNIX/'+file
             sftp.put(localpath, remotepath)
             sftp.close()
             ssh.close()
-            source = "C:\\TESTE\\"+file
-            destination = "C:\\DESTINO\\"+file
+            source = "C:\\PATH_PARA_DOWNLOAD\\"+file
+            destination = "C:\\BACKUP\\"+file
             os.rename(source, destination)
 except IndexError:
     pass        
