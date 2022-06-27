@@ -38,7 +38,7 @@ import paramiko
 
 pathArquivos=r'DISCO:\Pasta\SubPasta\\'
 pathBackup=r'DISCO:\Pasta\SubPasta\\'
-pathKenia=r'/Pasta/SubPasta/SubPasta/SubPasta/'
+pathUnix=r'/Pasta/SubPasta/SubPasta/SubPasta/'
 for _, _, arquivo in os.walk(pathArquivos):
     arq=arquivo
     param=0
@@ -58,7 +58,7 @@ try:
             sftp = ssh.open_sftp()
             localpath = pathArquivos+file
             print(localpath)
-            remotepath = pathKenia+file
+            remotepath = pathUnix+file
             sftp.put(localpath, remotepath)
             sftp.close()
             ssh.close()
