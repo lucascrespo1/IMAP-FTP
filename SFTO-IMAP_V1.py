@@ -2,15 +2,15 @@ def imaplib():
     import imaplib
     import email
 
-    SRV = "servidor.imap.com
-    USER = "email@email.com.br"
-    PASS = "senha"
+    SRV = "servidor.email.com"
+    USER = "email@email.com"
+    PASS = "senha.email"
 
     mail = imaplib.IMAP4_SSL(SRV)
     mail.login(USER, PASS)
 
     (mail.list())
-    (mail.select(mailbox="CAIXA_DE_EMAIL")) #ALTERAR MARCADOR
+    (mail.select(mailbox="MARCADOR DE EMAIL")) #ALTERAR MARCADOR
     respostas,IdDosEmails = mail.search(None,"UnSeen")
 
     for i in IdDosEmails[0].split():
@@ -35,7 +35,11 @@ imaplib()
 import os
 import sys
 import paramiko
-for _, _, arquivo in os.walk(r'C:\PATH_PARA_DOWNLOAD'):
+
+pathArquivos=r'DISCO:\Pasta\SubPasta\\'
+pathBackup=r'DISCO:\Pasta\SubPasta\\'
+pathKenia=r'/Pasta/SubPasta/SubPasta/SubPasta/'
+for _, _, arquivo in os.walk(pathArquivos):
     arq=arquivo
     param=0
 try:
@@ -46,15 +50,20 @@ try:
             param+=1
             ssh = paramiko.SSHClient()
             ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-            ssh.connect(r'host', username="usuario", password="senha")
+            servidor="servidor"
+            usuarioftp="usuario"
+            senhaftp="senha"
+            portaftp="porta"
+            ssh.connect(servidor, portaftp, usuarioftp, senhaftp)
             sftp = ssh.open_sftp()
-            localpath = "C:\\PATH_PARA_DOWNLOAD\\"+file
-            remotepath = r'/u02/oradata/orcl/pathUNIX/'+file
+            localpath = pathArquivos+file
+            print(localpath)
+            remotepath = pathKenia+file
             sftp.put(localpath, remotepath)
             sftp.close()
             ssh.close()
-            source = "C:\\PATH_PARA_DOWNLOAD\\"+file
-            destination = "C:\\BACKUP\\"+file
+            source = pathArquivos+file
+            destination = pathBackup+file
             os.rename(source, destination)
 except IndexError:
     pass        
